@@ -24,6 +24,7 @@
 		"@wordpress/scripts": "^24.6.0"
 	},
 	"dependencies": {
-		"date-fns": "^2.29.3"
+		"date-fns": "^2.29.3",
+		"tmi.js": "^1.8.5"
 	}
 }
