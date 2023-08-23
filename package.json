@@ -1,0 +1,29 @@
+{
+	"name": "vintage-pomodoro-timer",
+	"version": "1.0.0",
+	"description": "@todo - swap out tooling for Vite",
+	"main": "index.ts",
+	"scripts": {
+		"start": "vite",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/metalandcoffee/vintage-pomodoro-timer.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/metalandcoffee/vintage-pomodoro-timer/issues"
+	},
+	"homepage": "https://github.com/metalandcoffee/vintage-pomodoro-timer#readme",
+	"dependencies": {
+		"date-fns": "^2.30.0",
+		"tmi.js": "^1.8.5",
+		"vite": "^4.4.9"
+	},
+	"devDependencies": {
+		"@types/tmi.js": "^1.8.3"
+	}
+}
