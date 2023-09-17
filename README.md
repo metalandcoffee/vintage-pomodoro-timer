@@ -1,4 +1,3 @@
 # Vintage Pomodoro Timer
 @todo
-- swap out tooling for Vite
-- refactor to class
+- make time flash and alarm sound when timer is over
