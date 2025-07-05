@@ -2,12 +2,14 @@
 
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import { globalIgnores } from "@eslint/config-helpers";
 
-export default tseslint.config(
-  eslint.configs.recommended,
-  tseslint.configs.recommended,
-  globalIgnores([
-    "dist/",
-  ])
-);
+export default tseslint.config({
+  files: ['src/*.ts'],
+  extends: [
+    eslint.configs.recommended,
+    tseslint.configs.recommended,
+  ],
+  rules: {
+    '@typescript-eslint/array-type': 'error',
+  },
+});

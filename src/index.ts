@@ -7,7 +7,7 @@ const client = new tmi.Client({
 
 client.connect();
 
-init();jjkjkjk // needs to initialize when dom loads and needs to create new Timer instance that chat commands can manipulate.
+init(); // needs to initialize when dom loads and needs to create new Timer instance that chat commands can manipulate.
 
 client.on('message', (channel, tags, message, self) => {
     console.log(channel, tags, message, self);
@@ -18,7 +18,7 @@ client.on('message', (channel, tags, message, self) => {
         return;
     }
 
-    const timerArgs: Array<string> = message.split(' ');
+    const timerArgs: string[] = message.split(' ');
     const startOrStop: string = timerArgs[1];
     const mins: number = parseInt(timerArgs[2]);
 
