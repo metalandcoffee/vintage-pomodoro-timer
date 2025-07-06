@@ -4,6 +4,7 @@ import {
 	addSeconds,
 	intervalToDuration,
 } from 'date-fns';
+import alarm from './alarm.wav';
 
 export class Timer {
 
