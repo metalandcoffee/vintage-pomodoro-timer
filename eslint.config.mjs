@@ -11,5 +11,9 @@ export default tseslint.config({
   ],
   rules: {
     '@typescript-eslint/array-type': 'error',
+    "indent": ['error', 2], // Use 2 spaces for indentation.
+    "quotes": ['error', 'single'], // Enforce single quotes.
+    "semi": ['error', 'always'],   // Require semicolons.
+    "object-curly-spacing": ['error', 'always']
   },
 });
