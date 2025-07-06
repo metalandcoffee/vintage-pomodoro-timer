@@ -2,7 +2,6 @@ import {
 	addMinutes,
 	setMilliseconds,
 	addSeconds,
-	differenceInSeconds,
 	intervalToDuration,
 } from 'date-fns';
 
@@ -17,9 +16,9 @@ export class Timer {
 	/**
 	 * Constructor.
 	 */
-	constructor() {
-		this.minutesLimit = 5;
-		this.secondsLimit = 0;
+	constructor(minutesLimit: number, secondsLimit: number) {
+		this.minutesLimit = minutesLimit;
+		this.secondsLimit = secondsLimit;
 		this.timerId = 0;
 		this.minsEl = document.getElementById('minutes') as HTMLInputElement;
 		this.secsEl = document.getElementById('seconds') as HTMLInputElement;
@@ -40,36 +39,30 @@ export class Timer {
 			.padStart(2, '0');
 	}
 
-	updateMins(mins: number): void {
-		this.minutesLimit = isNaN(mins)
-			? 0
-			: mins;
-	}
-
-	updateSecs(secs: number): void {
-		this.secondsLimit = isNaN(secs)
-			? 0
-			: secs;
-	}
-
-	countdownStart() {
+	/**
+	 * Start the timer.
+	 */
+	start() {
+		console.log('pineapple');
 		let currentTime = new Date();
 		currentTime = setMilliseconds(currentTime, 0);
 		let endTime = addMinutes(currentTime, this.minutesLimit);
 		endTime = addSeconds(endTime, this.secondsLimit);
 
-		// Duration in seconds for circle animation.
-		const secsDuration: number = differenceInSeconds(endTime, currentTime);
-		this.animateProgress(secsDuration);
-
+		// Set up interval to run countdown function every second.
 		this.timerId = setInterval(
-			this.timer.bind(this),
+			this.countdown.bind(this),
 			1000,
 			endTime
 		);
 	}
 
-	timer(endTime: number) {
+	/**
+	 * Countdown function.
+	 * @param endTime 
+	 */
+	countdown(endTime: number) {
+		console.log('watermelon');
 		let currentTime = new Date();
 		currentTime = setMilliseconds(currentTime, 0);
 
@@ -82,10 +75,13 @@ export class Timer {
 		const remainingSecs = remainingTime.seconds as number;
 
 		// Render updated values.
-		this.minsEl.value = remainingMins.toString().padStart(2, '0');
-		this.secsEl.value = remainingSecs.toString().padStart(2, '0');
+		this.minsEl.innerText = remainingMins.toString().padStart(2, '0');
+		this.secsEl.innerText = remainingSecs.toString().padStart(2, '0');
 
 		if (!remainingTime.minutes && !remainingTime.seconds) {
+			// play sound.
+			const audio = new Audio('alarm.wav');
+			audio.play();
 			clearInterval(this.timerId);
 		}
 	}
