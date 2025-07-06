@@ -43,7 +43,6 @@ export class Timer {
 	 * Start the timer.
 	 */
   start() {
-    console.log('pineapple');
     let currentTime = new Date();
     currentTime = setMilliseconds(currentTime, 0);
     let endTime = addMinutes(currentTime, this.minutesLimit);
@@ -62,7 +61,6 @@ export class Timer {
 	 * @param endTime 
 	 */
   countdown(endTime: number) {
-    console.log('watermelon');
     let currentTime = new Date();
     currentTime = setMilliseconds(currentTime, 0);
 
@@ -86,24 +84,13 @@ export class Timer {
     }
   }
 
-  lint() {
-    // Stop countdown and reset values.
-    clearInterval(this.timerId);
-    this.minsEl.value = this.minutesLimit
-      .toString()
-      .padStart(2, '0');
-    this.secsEl.value = this.secondsLimit
-      .toString()
-      .padStart(2, '0');
-  }
-
   stop() {
     // Stop countdown and reset values.
     clearInterval(this.timerId);
-    this.minsEl.value = this.minutesLimit
+    this.minsEl.innerText = this.minutesLimit
       .toString()
       .padStart(2, '0');
-    this.secsEl.value = this.secondsLimit
+    this.secsEl.innerText = this.secondsLimit
       .toString()
       .padStart(2, '0');
   }

@@ -7,15 +7,11 @@ class Controller {
 
   constructor(channels: string[]) {
     this.client = new tmi.Client({ channels });
-  }
-
-  // Connect to the Twitch IRC server
-  connect(): void {
     this.client.connect();
-    // this.setupListeners();
+    this.setupListeners();
   }
 
-  // Set up message event listeners
+  // Set up message event listeners.
   private setupListeners(): void {
     this.client.on('message', (channel, tags, message, self) => {
       this.handleMessage(channel, tags, message, self);
@@ -44,47 +40,13 @@ class Controller {
 
     // Start or stop the timer based on the command
     if (startOrStop === 'start') {
-      this.startTimer(mins);
+      this.timer = new Timer(mins, 0);
+      this.timer.start();
     } else if (startOrStop === 'stop') {
-      this.stopTimer();
+      this.timer?.stop();
     }
   }
 
 }
-const client = new tmi.Client({
-  channels: ['metalandcoffee_']
-});
 
-client.connect();
-
-client.on('message', (channel, tags, message, self) => {
-  console.log(channel, tags, message, self);
-  const isBroadcaster: boolean = tags?.badges?.broadcaster === '1';
-
-  // example: !pomo start 15
-  if (!isBroadcaster || !message.includes('!pomo')) {
-    return;
-  }
-
-  const timerArgs: string[] = message.split(' ');
-  const startOrStop: string = timerArgs[1] || '';
-  const mins: number = parseInt(timerArgs[2]) || 0;
-  // @todo what happens if you give this a string?
-
-  if (!startOrStop.includes('stop') && !startOrStop.includes('start')) {
-    return;
-  }
-
-  let timer: Timer;
-
-  // Start timer.
-  if ('start' === startOrStop) {
-    timer = new Timer(mins, 0);
-    timer.start();
-  } else if ('stop' === startOrStop) {
-    timer.stop();
-  }
-
-
-
-});
+document.addEventListener('DOMContentLoaded', () => new Controller(['metalandcoffee_']));
